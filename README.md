@@ -4,111 +4,162 @@
 
 ### Indian Institute of Science (IISc), Bangalore
 
-### Team Members
+---
 
-* Amrit Seju
-* Pramod
+## Project Team
+
+* Amrit Lal (M.Tech Signal Processing, IISc Bangalore)
+* Pramod Kumar (M.Tech Signal Processing, IISc Bangalore)
+
+### Project Mentors
+
+* Prof. Soma Biswas
+* Prof. Prasanta Kumar Ghosh
 
 ---
 
 ## Project Overview
 
-The Fast Fourier Transform (FFT) is one of the most widely used tools for frequency-domain analysis. However, the frequency resolution of an FFT is limited by the FFT size and sampling frequency. When the actual signal frequency lies between FFT bins, direct peak detection can lead to estimation errors.
+Fast Fourier Transform (FFT) is widely used for frequency estimation in applications such as radar, sonar, LiDAR, telecommunications, medical imaging, and meteorology.
 
-This project investigates two spectral interpolation techniques:
+A major limitation of FFT-based frequency estimation is the finite frequency resolution determined by:
+
+Δf = Fs / NFFT
+
+When the actual signal frequency lies between FFT bins, significant estimation errors can occur.
+
+This project investigates two spectrum interpolation techniques:
 
 1. Parabolic Spectrum Interpolation
 2. Gaussian Spectrum Interpolation
 
-These methods estimate the true frequency more accurately by interpolating around the FFT peak.
+to improve frequency estimation accuracy beyond FFT-bin resolution.
 
 ---
 
 ## Objectives
 
-* Perform FFT-based spectral analysis.
-* Study the effect of different window functions.
-* Improve frequency estimation accuracy beyond FFT-bin resolution.
-* Implement parabolic interpolation.
-* Implement Gaussian interpolation.
-* Compare estimation errors using RMS and percentage error metrics.
+* Study FFT-based frequency estimation.
+* Analyze spectral leakage using different window functions.
+* Implement Parabolic Interpolation.
+* Implement Gaussian Interpolation.
+* Compare frequency estimation accuracy.
+* Evaluate RMS and percentage error performance.
+
+---
+
+## Implemented Window Functions
+
+* Hanning Window
+* Gaussian Window
+* Kaiser Window
+* Cosine 4T1 Window
+
+---
+
+## MATLAB Modules
+
+### Window Analysis
+
+* DSP_Project_windows.m
+* cosine_window.m
+
+Analyzes magnitude spectra and main-lobe characteristics of various window functions.
+
+### FFT Frequency Estimation
+
+* DSP_Project_FFT.m
+
+Performs FFT-based frequency estimation.
+
+### Interpolation Techniques
+
+* DSP_Interpolation.m
+* DSP_Interpolation2.m
+
+Implements:
+
+* Parabolic Interpolation
+* Gaussian Interpolation
+
+for sub-bin frequency estimation.
+
+### Error Analysis
+
+* DSP_Project_PercentageError.m
+* DSP_Project_RMSError.m
+
+Computes:
+
+* Percentage Frequency Error
+* RMS Frequency Error
 
 ---
 
 ## Methodology
 
-### Step 1: Signal Generation
-
-A sinusoidal signal of known frequency is generated.
-
-### Step 2: Windowing
-
-Different window functions are applied to reduce spectral leakage.
-
-Examples:
-
-* Cosine Window
-* Hamming Window
-* Hann Window
-
-### Step 3: FFT Computation
-
-The FFT of the windowed signal is calculated.
-
-### Step 4: Peak Detection
-
-The FFT bin corresponding to the maximum spectral magnitude is identified.
-
-### Step 5: Spectrum Interpolation
-
-The neighboring FFT bins are used to estimate the true frequency.
-
-#### Parabolic Interpolation
-
-A quadratic curve is fitted around the FFT peak to estimate the actual frequency location.
-
-#### Gaussian Interpolation
-
-A Gaussian curve is fitted around the FFT peak to obtain a more accurate frequency estimate.
-
-### Step 6: Error Analysis
-
-The estimated frequency is compared with the actual signal frequency.
-
-Metrics:
-
-* RMS Error
-* Percentage Error
+1. Generate sinusoidal signals.
+2. Add AWGN noise.
+3. Apply windowing.
+4. Compute FFT spectrum.
+5. Detect spectral peak.
+6. Apply interpolation techniques.
+7. Estimate frequency.
+8. Compare estimation errors.
 
 ---
 
-## MATLAB Files
+## Experimental Setup
 
-| File                          | Description                  |
-| ----------------------------- | ---------------------------- |
-| DSP_Project_FFT.m             | FFT computation              |
-| DSP_Interpolation.m           | Parabolic interpolation      |
-| DSP_Interpolation2.m          | Gaussian interpolation       |
-| DSP_Project_windows.m         | Window function analysis     |
-| DSP_Project_RMSError.m        | RMS error calculation        |
-| DSP_Project_PercentageError.m | Percentage error calculation |
-| DSP_Project_Test_wrapper_01.m | Test script                  |
-| DSP_Project_Test_wrapper_02.m | Test script                  |
-| cosine_window.m               | Cosine window implementation |
+### Test Case 1
+
+* 800 test signals
+* Frequency sweep without noise
+* Four window types
+
+### Test Case 2
+
+* 1600 test signals
+* SNR = 3, 6, 10, 20 dB
+* Frequency sweep with noise
+
+### Test Case 3
+
+* NFFT = 128, 256, 512
+* Frequency sweep with noise
+
+### Test Case 4
+
+* Two-tone frequency estimation
+* Interference signal with 0.7 amplitude
+* Hanning and Gaussian windows
 
 ---
 
-## Results
+## Key Results
 
-The interpolation techniques significantly improve frequency estimation accuracy compared to direct FFT peak detection.
+### Frequency Resolution Improvement
 
-Gaussian interpolation generally provides the highest estimation accuracy, particularly for frequencies located between FFT bins.
+Gaussian and Parabolic interpolation significantly reduce FFT estimation error.
+
+### Best Interpolation Method
+
+Gaussian interpolation generally provides better accuracy than Parabolic interpolation.
+
+### Best Window Function
+
+Gaussian window performs best under ideal conditions.
+
+Hanning window provides more robust performance across different scenarios.
 
 ---
 
-## Software Used
+## Technologies Used
 
 * MATLAB
+* Signal Processing Toolbox
+* FFT Analysis
+* Spectral Interpolation Techniques
 
 ---
 
@@ -117,3 +168,5 @@ Gaussian interpolation generally provides the highest estimation accuracy, parti
 Department of Electrical Engineering
 
 Indian Institute of Science (IISc), Bangalore
+
+2024
