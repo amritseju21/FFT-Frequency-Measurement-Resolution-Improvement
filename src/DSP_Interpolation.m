@@ -6,10 +6,9 @@
 %% Code Status: Completed
 %% Remarks: Nil
 %% Start funtion
-function DSP_Interpolation2(fs,SNR,N_fft,freq_start,freq_end,freq_step,j,Noise,freq2)
+function DSP_Interpolation(fs,SNR,N_fft,freq_start,freq_end,freq_step,j,Noise)
     T = 1;                  % Duration (s)
     A = 1;                  % Amplitude of the sine wave
-    B = 0.7;
     % Time vector
     t = 0:1/fs:T-1/fs;
 
@@ -27,7 +26,7 @@ function DSP_Interpolation2(fs,SNR,N_fft,freq_start,freq_end,freq_step,j,Noise,f
         f_sine = true_frequencies(idx);     % Current frequency in sweep
         
         % Generate sinewave
-        signal = A * sin(2 * pi * f_sine * t)+ B * sin(2 * pi * freq2 * t);
+        signal = A * sin(2 * pi * f_sine * t);
         
         % Add AWGN
          if Noise==1
@@ -95,7 +94,6 @@ function DSP_Interpolation2(fs,SNR,N_fft,freq_start,freq_end,freq_step,j,Noise,f
     
     % Display RMS error value
     fprintf('\n\nEvaluation Freqency Range is: %.2f Hz, to %.2f Hz with sweep step size of %.2f Hz\n', freq_start, freq_end, freq_step);
-    fprintf('Second Signal freq : %.d\n', freq2);
     if Noise==2
         fprintf('SNR(dB) : %.2f\n',SNR);
     end
@@ -115,8 +113,7 @@ function DSP_Interpolation2(fs,SNR,N_fft,freq_start,freq_end,freq_step,j,Noise,f
     plot(true_frequencies, abs(frequency_errors2), '-g^',LineWidth=2);
     xlabel('True Frequency (Hz)');
     ylabel('Absolute Frequency Estimation Error (Hz)');
-    temp=['Frequency Estimation Error with second freq.',num2str(freq2),' Hz'];
-    title(temp);
+    title('Frequency Estimation Error Across Frequency Sweep');
     grid minor;
     legend('FFT Estimation','FFT Parabolic Interpolation','FFT Parabolic Gaussian' );
     hold off;
